@@ -1,4 +1,11 @@
-import { Link, useSearchParams, json, redirect, useActionData } from 'remix'
+import {
+  Link,
+  useSearchParams,
+  json,
+  redirect,
+  useActionData,
+  MetaFunction,
+} from 'remix'
 import type { ActionFunction, LinksFunction } from 'remix'
 import stylesUrl from '../styles/login.css'
 import { db } from '~/utils/db.server'
@@ -29,6 +36,13 @@ export const links: LinksFunction = () => {
       media: 'screen and (min-width: 1024px)',
     },
   ]
+}
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Jokes app | Login',
+    description: 'Start saving your own jokes!!',
+  }
 }
 
 function validateUsername(username: unknown) {

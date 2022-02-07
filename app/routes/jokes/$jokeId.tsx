@@ -1,6 +1,7 @@
 import {
   ActionFunction,
   Link,
+  MetaFunction,
   redirect,
   useCatch,
   useLoaderData,
@@ -21,6 +22,20 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   if (!joke) throw new Response('What a joke! Not found.', { status: 404 })
   const data: LoaderData = { joke, isOwner: userId === joke.jokesterId }
   return data
+}
+
+export const meta: MetaFunction = ({
+  data,
+}: {
+  data: LoaderData | undefined
+}) => {
+  let joke = data?.joke
+  return {
+    title: joke ? `${joke.name} joke` : 'No joke',
+    description: joke
+      ? `Enjoy the ${joke.name} joke and much more`
+      : 'Joke not found',
+  }
 }
 
 export const action: ActionFunction = async ({ request, params }) => {

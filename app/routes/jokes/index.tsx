@@ -1,10 +1,17 @@
 import type { Joke } from '@prisma/client'
-import { Link, LoaderFunction, useCatch } from 'remix'
+import { Link, LoaderFunction, MetaFunction, useCatch } from 'remix'
 import { useLoaderData } from 'remix'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
   randomJoke: Joke
+}
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Jokes App',
+    description: 'Store your jokes and share them with the world!',
+  }
 }
 
 export const loader: LoaderFunction = async () => {
