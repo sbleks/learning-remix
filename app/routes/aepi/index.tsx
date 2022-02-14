@@ -1,5 +1,11 @@
 import { SyntheticEvent, useEffect, useState } from 'react'
-import { ActionFunction, Form, useActionData, useTransition } from 'remix'
+import {
+  ActionFunction,
+  Form,
+  MetaFunction,
+  useActionData,
+  useTransition,
+} from 'remix'
 import * as copy from 'copy-to-clipboard'
 
 type linkParts = {
@@ -14,6 +20,12 @@ export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData()
   let values = Object.fromEntries(formData)
   return constructLink(values)
+}
+
+export const meta: MetaFunction = () => {
+  return {
+    'theme-color': '#0f172a',
+  }
 }
 
 function constructLink(parts: linkParts) {
@@ -49,7 +61,7 @@ export default function AEPiIndexRoute() {
     transition.state === 'submitting' && setLoaded(true)
   }, [transition])
   return (
-    <div className='m-auto h-screen max-w-4xl flex flex-col items-center justify-center gap-8'>
+    <div className='m-6 sm:m-auto sm:h-screen max-w-4xl flex flex-col items-center justify-center gap-8 dark:text-gray-100'>
       <h1 className='font-semibold text-4xl'>AEPi Donation Link Generator</h1>
       <Form method='post' className='w-full' autoComplete='off'>
         <fieldset />

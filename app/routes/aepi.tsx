@@ -1,8 +1,8 @@
 import { Outlet } from 'remix'
-import aepistyle from '~/styles/aepi.css'
+import stylesheet from '~/styles/tailwind.css'
 
 export const links = () => {
-  return [{ rel: 'stylesheet', href: aepistyle }]
+  return [{ rel: 'stylesheet', href: stylesheet }]
 }
 
 export default function AEPI() {

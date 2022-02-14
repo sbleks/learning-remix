@@ -1,8 +1,13 @@
 module.exports = {
+  darkMode: 'class',
   content: ['./app/**/*.{ts,tsx,jsx,js}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        cursive: ['Oooh Baby', 'cursive'],
+      },
+    },
   },
   variants: {},
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

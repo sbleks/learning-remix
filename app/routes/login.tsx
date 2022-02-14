@@ -5,6 +5,7 @@ import {
   redirect,
   useActionData,
   MetaFunction,
+  Form,
 } from 'remix'
 import type { ActionFunction, LinksFunction } from 'remix'
 import stylesUrl from '../styles/login.css'
@@ -135,7 +136,7 @@ export default function Login() {
     <div className='container'>
       <div className='content' data-light=''>
         <h1>Login</h1>
-        <form
+        <Form
           method='post'
           aria-describedby={
             actionData?.formError ? 'form-error-message' : undefined
@@ -226,7 +227,7 @@ export default function Login() {
           <button type='submit' className='button'>
             Submit
           </button>
-        </form>
+        </Form>
       </div>
       <div className='links'>
         <ul>

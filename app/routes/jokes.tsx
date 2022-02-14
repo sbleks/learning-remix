@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderFunction } from 'remix'
+import { Form, LinksFunction, LoaderFunction, MetaFunction } from 'remix'
 import { Outlet, Link, useLoaderData } from 'remix'
 import stylesUrl from '~/styles/jokes.css'
 import { db } from '~/utils/db.server'
@@ -29,9 +29,31 @@ export const links: LinksFunction = () => {
       href: globalLargeStylesUrl,
       media: 'screen and (min-width: 1024px)',
     },
+    {
+      rel: 'icon',
+      href: '/favicon-16x16.png',
+      type: 'image/png',
+      sizes: '16x16',
+    },
+    {
+      rel: 'icon',
+      href: '/favicon-32x32.png',
+      type: 'image/png',
+      sizes: '32x32',
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: '/apple-touch-icon.png',
+      sizes: '180x180',
+    },
   ]
 }
 
+export const meta: MetaFunction = () => {
+  return {
+    'theme-color': '#3a0d54',
+  }
+}
 type LoaderData = {
   jokeListItems: Array<{ id: string; name: string }>
   username?: String | null
@@ -65,11 +87,11 @@ export default function JokesRoute() {
           {username ? (
             <div className='user-info'>
               <span>Hi {username}</span>
-              <form action='/logout' method='post'>
+              <Form action='/logout' method='post'>
                 <button type='submit' className='button'>
                   Logout
                 </button>
-              </form>
+              </Form>
             </div>
           ) : (
             <Link to='/login'>Login</Link>
@@ -84,7 +106,9 @@ export default function JokesRoute() {
             <ul>
               {jokeListItems.map((joke) => (
                 <li key={joke.id}>
-                  <Link to={joke.id}>{joke.name}</Link>
+                  <Link prefetch='intent' to={joke.id}>
+                    {joke.name}
+                  </Link>
                 </li>
               ))}
             </ul>
