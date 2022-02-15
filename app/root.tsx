@@ -9,7 +9,7 @@ import {
   useCatch,
 } from 'remix'
 import type { MetaFunction, LinksFunction } from 'remix'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export const meta: MetaFunction = () => {
   return { title: 'New Remix App', 'theme-color': '#323cbc' }
