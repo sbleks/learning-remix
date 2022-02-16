@@ -1,67 +1,61 @@
-import {
-  Link,
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useCatch,
-} from 'remix'
-import type { MetaFunction, LinksFunction } from 'remix'
-import React from 'react'
+import type { LinksFunction, MetaFunction } from 'remix'
+import { Links, LiveReload, Outlet, useCatch, Meta } from 'remix'
 
-export const meta: MetaFunction = () => {
-  return { title: 'New Remix App', 'theme-color': '#323cbc' }
-}
+import globalStylesUrl from './styles/global.css'
+import globalMediumStylesUrl from './styles/global-medium.css'
+import globalLargeStylesUrl from './styles/global-large.css'
 
 export const links: LinksFunction = () => {
   return [
     {
-      rel: 'icon',
-      href: '/sfavicon32.png',
-      type: 'image/png',
-      sizes: '32x32',
-    },
-    {
-      rel: 'apple-touch-icon',
-      href: '/sfavicon180.png',
-      sizes: '180x180',
-    },
-    {
-      rel: 'icon',
-      href: '/sfavicon16.png',
-      type: 'image/png',
-      sizes: '16x16',
+      rel: 'stylesheet',
+      href: globalStylesUrl,
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap',
+      href: globalMediumStylesUrl,
+      media: 'print, (min-width: 640px)',
+    },
+    {
+      rel: 'stylesheet',
+      href: globalLargeStylesUrl,
+      media: 'screen and (min-width: 1024px)',
     },
   ]
 }
 
+export const meta: MetaFunction = () => {
+  const description = `Learn Remix and laugh at the same time!`
+  return {
+    description,
+    keywords: 'Remix,jokes',
+    'twitter:image': 'https://remix-jokes.lol/social.png',
+    'twitter:card': 'summary_large_image',
+    'twitter:creator': '@remix_run',
+    'twitter:site': '@remix_run',
+    'twitter:title': 'Remix Jokes',
+    'twitter:description': description,
+  }
+}
+
 function Document({
   children,
-  title = 'SamBlekhman.com',
+  title = `Remix: So great, it's funny!`,
 }: {
   children: React.ReactNode
-  title?: String
+  title?: string
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <title>{title}</title>
         <Links />
       </head>
-      <body className="dark:bg-slate-900">
+      <body>
         {children}
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
     </html>
   )
@@ -75,17 +69,6 @@ export default function App() {
   )
 }
 
-export function ErrorBoundary({ error }: { error: Error }) {
-  return (
-    <Document title="uh oh!">
-      <div className="error-container">
-        <h1>App Error</h1>
-        <pre>{error.message}</pre>
-      </div>
-    </Document>
-  )
-}
-
 export function CatchBoundary() {
   const caught = useCatch()
 
@@ -95,6 +78,17 @@ export function CatchBoundary() {
         <h1>
           {caught.status} {caught.statusText}
         </h1>
+      </div>
+    </Document>
+  )
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <Document title="Uh-oh!">
+      <div className="error-container">
+        <h1>App Error</h1>
+        <pre>{error.message}</pre>
       </div>
     </Document>
   )
