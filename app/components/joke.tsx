@@ -16,15 +16,17 @@ export default function DisplayJoke({
     <div>
       <p>Here's your hilarious joke:</p>
       <p>{joke.content}</p>
+      <Link to=".">
+        <p>"{joke.name}" Permalink</p>
+      </Link>
       {isOwner ? (
-        <Form method='post'>
-          <input type='hidden' name='_method' value='delete' />
-          <button type='submit' className='button' disabled={!canDelete}>
+        <Form method="post">
+          <input type="hidden" name="_method" value="delete" />
+          <button type="submit" className="button" disabled={!canDelete}>
             Delete
           </button>
         </Form>
       ) : null}
-      <Link to='.'>"{joke.name}" Permalink</Link>
     </div>
   )
 }

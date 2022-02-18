@@ -17,7 +17,7 @@ export default function Index() {
     <div className="container">
       <div className="content">
         <h1>
-          <span>Jokes!</span>
+          Sam's<span>Jokes!</span>
         </h1>
         <nav>
           <ul>

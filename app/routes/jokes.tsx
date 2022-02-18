@@ -75,48 +75,48 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function JokesRoute() {
   let { jokeListItems, username } = useLoaderData<LoaderData>()
   return (
-    <div className='jokes-layout'>
-      <header className='jokes-header'>
-        <div className='container'>
-          <h1 className='home-link'>
-            <Link to='/' title='Remix Jokes' aria-label='Remix Jokes'>
-              <span className='logo'>🤪</span>
-              <span className='logo-medium'>J🤪KES</span>
+    <div className="jokes-layout">
+      <header className="jokes-header">
+        <div className="container">
+          <h1 className="home-link">
+            <Link to="/" title="Sam's Jokes" aria-label="Sam's Jokes">
+              <span className="logo">🤪</span>
+              <span className="logo-medium">Sam's J🤪KES</span>
             </Link>
           </h1>
           {username ? (
-            <div className='user-info'>
+            <div className="user-info">
               <span>Hi {username}</span>
-              <Form action='/logout' method='post'>
-                <button type='submit' className='button'>
+              <Form action="/logout" method="post">
+                <button type="submit" className="button">
                   Logout
                 </button>
               </Form>
             </div>
           ) : (
-            <Link to='/login'>Login</Link>
+            <Link to="/login">Login</Link>
           )}
         </div>
       </header>
-      <main className='jokes-main'>
-        <div className='container'>
-          <div className='jokes-list'>
-            <Link to='.'>Get a random joke</Link>
+      <main className="jokes-main">
+        <div className="container">
+          <div className="jokes-list">
+            <Link to=".">Get a random joke</Link>
             <p>Here are a few more jokes to check out:</p>
             <ul>
               {jokeListItems.map((joke) => (
                 <li key={joke.id}>
-                  <Link prefetch='intent' to={joke.id}>
+                  <Link prefetch="intent" to={joke.id}>
                     {joke.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            <Link to='new' className='button'>
+            <Link to="new" className="button">
               Add your own
             </Link>
           </div>
-          <div className='jokes-outlet'>
+          <div className="jokes-outlet">
             <Outlet />
           </div>
         </div>
